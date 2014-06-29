@@ -1,0 +1,13 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <!--Colorbrushes needed throughout the app-->
+    <SolidColorBrush x:Key="VikingColorBrush">#960808</SolidColorBrush>
+    <Color x:Key="VikingColor">#960808</Color>
+    <SolidColorBrush x:Key="DataColorBrush">#006ac1</SolidColorBrush>
+    <SolidColorBrush x:Key="SmsColorBrush">#f4b300</SolidColorBrush>
+    <SolidColorBrush x:Key="VikingSmsColorBrush">#f4b300</SolidColorBrush>
+    <SolidColorBrush x:Key="VikingMinutesColorBrush">#006ac1</SolidColorBrush>
+    
+</ResourceDictionary>
