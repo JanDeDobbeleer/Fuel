@@ -1,6 +1,6 @@
-﻿namespace Fuel.Credentials
+﻿namespace Fuel.Oauth.Base
 {
-    interface ICredential
+    public interface ICredential
     {
         string ConsumerKey { get; }
         string ConsumerSecret { get; }

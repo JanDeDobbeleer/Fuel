@@ -8,7 +8,7 @@ namespace Fuel.Oauth.Utils
 {
     public class XAuth: OauthRequest
     {
-        public async Task<OauthToken> XAuthAccessTokenRequest(string username, string password, string consumerKey, string consumerSecret, string xauthUri)
+        public async Task<OauthToken> XAuthAccessTokenRequest(string username, string password, ICredential credentials, string xauthUri)
         {
             try
             {
@@ -17,8 +17,8 @@ namespace Fuel.Oauth.Utils
                 var nonce = GenerateNonce();
                 var timeStamp = GenerateTimeStamp();
                 var sig = GenerateSignature(new Uri(xauthUri),
-                    consumerKey,
-                    consumerSecret,
+                    credentials.ConsumerKey,
+                    credentials.ConsumerSecret,
                     string.Empty,
                     string.Empty,
                     string.Empty,

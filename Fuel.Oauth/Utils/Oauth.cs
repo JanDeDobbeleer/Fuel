@@ -7,13 +7,13 @@ namespace Fuel.Oauth.Utils
 {
     public class Oauth : OauthRequest
     {
-        public async Task<string> OAuthRequest(string consumerKey, string consumerSecret, OauthToken oauthToken, string oauthUri, IList<QueryParameter> parameters)
+        public async Task<string> OAuthRequest(ICredential credentials, OauthToken oauthToken, string oauthUri, IList<QueryParameter> parameters)
         {
             var uri = oauthUri + "?" + NormalizeRequestParameters(parameters);
-            return await OAuthRequest(consumerKey, consumerSecret, oauthToken, uri);
+            return await OAuthRequest(credentials, oauthToken, uri);
         }
 
-        private async Task<string> OAuthRequest(string consumerKey, string consumerSecret, OauthToken oauthToken, string oauthUri)
+        private async Task<string> OAuthRequest(ICredential credentials, OauthToken oauthToken, string oauthUri)
         {
             try
             {
@@ -22,8 +22,8 @@ namespace Fuel.Oauth.Utils
                 var nonce = GenerateNonce();
                 var timeStamp = GenerateTimeStamp();
                 var sig = GenerateSignature(new Uri(oauthUri),
-                    consumerKey,
-                    consumerSecret,
+                    credentials.ConsumerKey,
+                    credentials.ConsumerSecret,
                     oauthToken.TokenKey,
                     oauthToken.TokenSecret,
                     "GET",

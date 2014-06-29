@@ -7,7 +7,7 @@
 *.sln.docstates
 
 # Private keys
-Fuel.Credentials/Credentials.cs
+Test.Oauth/Test/Credentials.cs
 
 # Build results
 [Dd]ebug/

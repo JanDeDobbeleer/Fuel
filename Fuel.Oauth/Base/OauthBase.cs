@@ -7,13 +7,6 @@ using Windows.Security.Cryptography.Core;
 
 namespace Fuel.Oauth.Base
 {
-    public enum SignatureTypes
-    {
-        HMACSHA1,
-        PLAINTEXT,
-        RSASHA1
-    }
-
     public class OAuthBase
     {
         protected string UnreservedChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_.~";
@@ -22,17 +15,14 @@ namespace Fuel.Oauth.Base
         protected const string OAuthParameterPrefix = "oauth_";
 
         //
-        // List of known and used oauth parameters' names
+        // List of used oauth parameters' names
         //        
         protected const string OAuthConsumerKeyKey = "oauth_consumer_key";
-        protected const string OAuthCallbackKey = "oauth_callback";
         protected const string OAuthVersionKey = "oauth_version";
         protected const string OAuthSignatureMethodKey = "oauth_signature_method";
-        protected const string OAuthSignatureKey = "oauth_signature";
         protected const string OAuthTimestampKey = "oauth_timestamp";
         protected const string OAuthNonceKey = "oauth_nonce";
         protected const string OAuthTokenKey = "oauth_token";
-        protected const string OAuthTokenSecretKey = "oauth_token_secret";
         protected const string OAuthVerifier = "oauth_verifier";
         protected const string XAuthUsername = "x_auth_username";
         protected const string XAuthPassword = "x_auth_password";
@@ -40,8 +30,6 @@ namespace Fuel.Oauth.Base
 
 
         protected const string Hmacsha1SignatureType = "HMAC-SHA1";
-        protected const string PlainTextSignatureType = "PLAINTEXT";
-        protected const string Rsasha1SignatureType = "RSA-SHA1";
 
         protected Random Random = new Random();
 
