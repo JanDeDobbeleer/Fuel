@@ -6,9 +6,9 @@ using Fuel.Oauth.Base;
 
 namespace Fuel.Oauth.Utils
 {
-    public class XAuth: OauthRequest
+    public class XAuth: OAuthRequest
     {
-        public async Task<OauthToken> XAuthAccessTokenRequest(string username, string password, ICredential credentials, string xauthUri)
+        public async Task<OAuthToken> XAuthAccessTokenRequest(string username, string password, ICredential credentials, string xauthUri)
         {
             try
             {
@@ -37,16 +37,17 @@ namespace Fuel.Oauth.Utils
                     var qs = GetQueryParameters(responseData);
                     if (qs["oauth_token"] != null && qs["oauth_token_secret"] != null)
                     {
-                        return new OauthToken {TokenKey = qs["oauth_token"], TokenSecret = qs["oauth_token_secret"]};
+                        return new OAuthToken {TokenKey = qs["oauth_token"], TokenSecret = qs["oauth_token_secret"]};
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                //TODO: handle this exception well by throwing something that is correct
-                return new OauthToken();
+                if (e is OAuthException)
+                    throw;
+                return new OAuthToken();
             }
-            return new OauthToken();
+            return new OAuthToken();
         }
 
         private new Dictionary<string, string> GetQueryParameters(string response)

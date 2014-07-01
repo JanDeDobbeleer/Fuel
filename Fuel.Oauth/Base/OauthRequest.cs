@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Fuel.Oauth.Base
 {
-    public class OauthRequest: OAuthBase, IDisposable
+    public class OAuthRequest: OAuthBase, IDisposable
     {
         private IntPtr _nativeResource = Marshal.AllocHGlobal(100);
 
@@ -35,10 +35,13 @@ namespace Fuel.Oauth.Base
                     return responseData;
                 }
             }
+            catch (WebException e)
+            {
+                throw e.Message.GetOauthErrorMessage();
+            }
             catch (Exception)
             {
-                //TODO: handle this exception well by throwing something that is correct
-                return string.Empty;
+                throw new OAuthException(100, "unknown error");
             }
             return string.Empty;
         }
@@ -53,7 +56,7 @@ namespace Fuel.Oauth.Base
         // NOTE: Leave out the finalizer altogether if this class doesn't 
         // own unmanaged resources itself, but leave the other methods
         // exactly as they are. 
-        ~OauthRequest()
+        ~OAuthRequest()
         {
             // Finalizer calls Dispose(false)
             Dispose(false);

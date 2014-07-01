@@ -5,15 +5,15 @@ using Fuel.Oauth.Base;
 
 namespace Fuel.Oauth.Utils
 {
-    public class Oauth : OauthRequest
+    public class OAuth : OAuthRequest
     {
-        public async Task<string> OAuthRequest(ICredential credentials, OauthToken oauthToken, string oauthUri, IList<QueryParameter> parameters)
+        public async Task<string> OAuthRequest(ICredential credentials, OAuthToken oAuthToken, string oauthUri, IList<QueryParameter> parameters)
         {
             var uri = oauthUri + "?" + NormalizeRequestParameters(parameters);
-            return await OAuthRequest(credentials, oauthToken, uri);
+            return await OAuthRequest(credentials, oAuthToken, uri);
         }
 
-        private async Task<string> OAuthRequest(ICredential credentials, OauthToken oauthToken, string oauthUri)
+        private async Task<string> OAuthRequest(ICredential credentials, OAuthToken oAuthToken, string oauthUri)
         {
             try
             {
@@ -24,8 +24,8 @@ namespace Fuel.Oauth.Utils
                 var sig = GenerateSignature(new Uri(oauthUri),
                     credentials.ConsumerKey,
                     credentials.ConsumerSecret,
-                    oauthToken.TokenKey,
-                    oauthToken.TokenSecret,
+                    oAuthToken.TokenKey,
+                    oAuthToken.TokenSecret,
                     "GET",
                     timeStamp,
                     nonce,
@@ -34,9 +34,10 @@ namespace Fuel.Oauth.Utils
 
                 return await OAuthResponseGet(querystring, sig, outUrl);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                //TODO: handle this exception well by throwing something that is correct
+                if (e is OAuthException)
+                    throw;
                 return string.Empty;
             }
         }
