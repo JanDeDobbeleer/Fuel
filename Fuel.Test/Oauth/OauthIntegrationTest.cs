@@ -5,10 +5,10 @@ using Fuel.Oauth.Base;
 using Fuel.Oauth.Utils;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 
-namespace Test.Oauth.Test
+namespace Fuel.Test.Oauth
 {
     [TestClass]
-    public class OauthTest
+    public class OauthIntegrationTest
     {
         [TestMethod]
         public async Task TestLogin()

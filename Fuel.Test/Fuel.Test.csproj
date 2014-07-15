@@ -9,8 +9,8 @@
     <ProjectGuid>{179590A1-A19E-4142-BB41-C637BBE19375}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Test.Oauth</RootNamespace>
-    <AssemblyName>Test.Oauth</AssemblyName>
+    <RootNamespace>Fuel.Test</RootNamespace>
+    <AssemblyName>Fuel.Test</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformVersion>8.1</TargetPlatformVersion>
     <MinimumVisualStudioVersion>12</MinimumVisualStudioVersion>
@@ -113,9 +113,10 @@
     <SDKReference Include="TestPlatform, Version=11.0" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api\TestApi.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Test\Credentials.cs" />
-    <Compile Include="Test\OauthTest.cs" />
+    <Compile Include="Oauth\Credentials.cs" />
+    <Compile Include="Oauth\OauthIntegrationTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -138,6 +139,10 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Fuel.Api\Fuel.Api.csproj">
+      <Project>{065926EC-F8CE-4CCD-9760-1BA015BFB09A}</Project>
+      <Name>Fuel.Api</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Fuel.Oauth\Fuel.Oauth.csproj">
       <Project>{a1ed2720-37db-41c5-be19-d13d8777b950}</Project>
       <Name>Fuel.Oauth</Name>

@@ -8,6 +8,7 @@
 
 # Private keys
 Test.Oauth/Test/Credentials.cs
+Fuel.Api/Common/Credentials.cs
 
 # Build results
 [Dd]ebug/
