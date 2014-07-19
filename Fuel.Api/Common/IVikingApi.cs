@@ -11,7 +11,7 @@ namespace Fuel.Api.Common
         Usage GetUsage();
         Task<List<Msisdn>> GetMsisdnList(OAuthToken token);
         PricePlan GetPricePlanDetails();
-        Balance GetSimBalance(string msisdn);
+        Task<Balance> GetSimBalance(string msisdn, OAuthToken token);
         List<Topup> GetTopupHistory(string msisdn);
         MsisdnDetails GetSimCardInformation(string msisdn);
         VikingPointStatistics GetVikingPointStatistics();

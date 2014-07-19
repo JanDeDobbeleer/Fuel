@@ -1,0 +1,17 @@
+﻿<UserControl
+    x:Class="Fuel.Controls.AnimatedCircle"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Fuel.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+    
+    <Grid>
+        <Path x:Name="ProgressPath" Stroke="{Binding SegmentColor, ElementName=userControl}" StrokeThickness="{Binding StrokeThickness, ElementName=userControl}" 
+          HorizontalAlignment="Center" VerticalAlignment="Center" Height="{Binding CircleHeight, ElementName=userControl}" Width="{Binding CircleWidth, ElementName=userControl}"
+          Data="m 150,0 A 150,0 0 0 0 150,0 A 150,150 0 0 0 150,0" />
+    </Grid>
+</UserControl>

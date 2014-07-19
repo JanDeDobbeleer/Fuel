@@ -29,8 +29,8 @@
             <Setter Property="VerticalAlignment" Value="Center" />
         </Style>
         <Style x:Key="CircleStyle" TargetType="controls:CircularProgressBar">
-            <Setter Property="HorizontalAlignment" Value="Center" />
-            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="VerticalAlignment" Value="Stretch" />
             <Setter Property="StrokeThickness" Value="10" />
         </Style>
         <Style x:Key="RectangleStyle" TargetType="Rectangle">
@@ -52,7 +52,7 @@
                     </Grid.ColumnDefinitions>
                     <StackPanel Orientation="Horizontal">
                         <Image Source="/Images/headerLogo.png" />
-                        <TextBlock x:Uid="Title" Text="Fuel" Style="{StaticResource }"/>
+                        <TextBlock x:Uid="Title" Style="{ThemeResource HeaderStyle}"/>
                     </StackPanel>
                     <TextBlock Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,54,0"/>
                 </Grid>
@@ -62,7 +62,7 @@
             <PivotItem x:Uid="MainPivot1">
             <Grid Margin="15,0,10,0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="300" />
+                    <RowDefinition Height="*" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="10" />
                     <RowDefinition Height="Auto" />
@@ -74,45 +74,49 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <controls:CircularProgressBar Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3"
-                                                  Style="{StaticResource CircleStyle}"
-                                                  SegmentColor="{StaticResource SmsColorBrush}" 
-                                                  Radius="110">
+                    <controls:CircularProgressBar Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3"
+                                         SegmentColor="{ThemeResource SmsColorBrush}" 
+                                         Radius="110"
+                                         Percentage="30">
                     <!--<i:Interaction.Triggers>
                         <EventTrigger EventName="Loaded">
-                            <ei:ControlStoryboardAction Storyboard="{StaticResource Loading}"/>
+                            <ei:ControlStoryboardAction Storyboard="{ThemeResource Loading}"/>
                         </EventTrigger>
                     </i:Interaction.Triggers>-->
                 </controls:CircularProgressBar>
-                <controls:CircularProgressBar Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3"
-                                                  Style="{StaticResource CircleStyle}"
-                                                  SegmentColor="{StaticResource DataColorBrush}" 
-                                                  Radius="95"/>
-                <controls:CircularProgressBar Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3"
-                                                  Style="{StaticResource CircleStyle}"
-                                                  SegmentColor="{StaticResource VikingColorBrush}" 
-                                                  Radius="80"/>
+                    <controls:AnimatedCircle Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3"
+                                             SegmentColor="{ThemeResource DataColorBrush}" 
+                                             Radius="95"
+                                             Percentage="30"
+                                             CircleHeight="300"
+                                             CirlceWidth="300"/>
+                    <controls:AnimatedCircle Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3"
+                                             SegmentColor="{ThemeResource VikingColorBrush}" 
+                                             Radius="80"
+                                             CircleHeight="300"
+                                             CirlceWidth="300"
+                                             Percentage="75"/>
                 <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Text="{Binding Credit}"
                                VerticalAlignment="Center" HorizontalAlignment="Center"
                                FontFamily="{StaticResource PhoneFontFamilyNormal}"
                                Foreground="{StaticResource PhoneForegroundBrush}" FontWeight="Bold"/>
-                <Rectangle Fill="{StaticResource SmsColorBrush}" Grid.Row="1" Grid.Column="0"
-                               Style="{StaticResource RectangleStyle}" />
-                <TextBlock Text="{Binding Sms}" Style="{StaticResource ContentTextStyle}" Grid.Row="1"
+                    <Rectangle Fill="{ThemeResource SmsColorBrush}" Grid.Row="1" Grid.Column="0"
+                               Style="{ThemeResource RectangleStyle}" />
+                    <TextBlock Text="{Binding Sms}" Style="{ThemeResource ContentTextStyle}" Grid.Row="1"
                                Grid.Column="1" />
                 <TextBlock x:Uid="Sms" Style="{StaticResource TextStyle}" Grid.Row="1" Grid.Column="2" />
 
-                <Rectangle Fill="{StaticResource DataColorBrush}" Grid.Row="3" Grid.Column="0"
-                               Style="{StaticResource RectangleStyle}" />
-                <TextBlock Text="{Binding Data}" Style="{StaticResource ContentTextStyle}" Grid.Row="3"
+                    <Rectangle Fill="{ThemeResource DataColorBrush}" Grid.Row="3" Grid.Column="0"
+                               Style="{ThemeResource RectangleStyle}" />
+                    <TextBlock Text="{Binding Data}" Style="{ThemeResource ContentTextStyle}" Grid.Row="3"
                                Grid.Column="1" />
-                <TextBlock x:Uid="Data" Style="{StaticResource TextStyle}" Grid.Row="3" Grid.Column="2" />
+                    <TextBlock x:Uid="Data" Style="{ThemeResource TextStyle}" Grid.Row="3" Grid.Column="2" />
 
-                <Rectangle Fill="{StaticResource VikingColorBrush}" Grid.Row="5" Grid.Column="0"
-                               Style="{StaticResource RectangleStyle}" />
-                <TextBlock Text="{Binding Remaining}" Style="{StaticResource ContentTextStyle}" Grid.Row="5"
+                    <Rectangle Fill="{ThemeResource VikingColorBrush}" Grid.Row="5" Grid.Column="0"
+                               Style="{ThemeResource RectangleStyle}" />
+                    <TextBlock Text="{Binding Remaining}" Style="{ThemeResource ContentTextStyle}" Grid.Row="5"
                                Grid.Column="1" />
-                <TextBlock x:Uid="Remaining" Style="{StaticResource TextStyle}" Grid.Row="5" Grid.Column="2" />
+                    <TextBlock x:Uid="Remaining" Style="{ThemeResource TextStyle}" Grid.Row="5" Grid.Column="2" />
             </Grid>
         </PivotItem>
             

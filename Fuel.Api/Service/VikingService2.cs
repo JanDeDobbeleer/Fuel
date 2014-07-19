@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 
 namespace Fuel.Api.Service
 {
-    class VikingService2: IVikingApi
+    public class VikingService2: IVikingApi
     {
         public async Task<OAuthToken> Login(string username, string password)
         {
@@ -45,9 +45,18 @@ namespace Fuel.Api.Service
             throw new NotImplementedException();
         }
 
-        public Balance GetSimBalance(string msisdn)
+        public async Task<Balance> GetSimBalance(string msisdn, OAuthToken token)
         {
-            throw new NotImplementedException();
+            string response;
+            using (var oauth = new OAuth())
+            {
+                var parameters = new List<QueryParameter> { new QueryParameter("msisdn", msisdn) };
+                response = await oauth.OAuthRequest(Credentials.GetInstance(), token, "https://mobilevikings.com:443/api/2.0/oauth/sim_balance.json", parameters);
+            }
+            //TODO: finish this
+            if (response != null && !string.IsNullOrWhiteSpace(response))
+                return JsonConvert.DeserializeObject<Balance>(response);
+            return new Balance();
         }
 
         public List<Topup> GetTopupHistory(string msisdn)

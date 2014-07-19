@@ -64,9 +64,9 @@ namespace Fuel.Api.Service
             return _api.GetPricePlanDetails();
         }
 
-        public Balance GetSimBalance(string msisdn)
+        public Task<Balance> GetSimBalance(string msisdn, OAuthToken token)
         {
-            return _api.GetSimBalance(msisdn);
+            return _api.GetSimBalance(msisdn, token);
         }
 
         public List<Topup> GetTopupHistory(string msisdn)

@@ -80,6 +80,7 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="View\Main.xaml.cs">
       <DependentUpon>Main.xaml</DependentUpon>
@@ -141,6 +142,7 @@
   </PropertyGroup>
   <Import Project="..\Fuel.Shared\Fuel.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
+  <Import Project="$(XamlSpyInstallPath)MSBuild\FirstFloor.XamlSpy.WindowsPhone.targets" Condition="'$(XamlSpyInstallPath)' != '' and '$(Configuration)' == 'DEBUG'" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
