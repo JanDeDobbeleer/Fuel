@@ -85,7 +85,7 @@ namespace Fuel.Oauth.Base
 
             foreach (var symbol in value)
             {
-                if (UnreservedChars.IndexOf(symbol) != -1)
+                if (UnreservedChars.IndexOf(symbol.ToString(), StringComparison.Ordinal) != -1)
                 {
                     result.Append(symbol);
                 }
@@ -94,7 +94,7 @@ namespace Fuel.Oauth.Base
                     //some symbols produce > 2 char values so the system urlencoder must be used to get the correct data
                     if (String.Format("{0:X2}", (int)symbol).Length > 3)
                     {
-                        result.Append(WebUtility.UrlEncode(value.Substring(value.IndexOf(symbol), 1)).ToUpper());
+                        result.Append(WebUtility.UrlEncode(value.Substring(value.IndexOf(symbol.ToString(), StringComparison.Ordinal), 1)).ToUpper());
                     }
                     else
                     {

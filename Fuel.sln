@@ -26,6 +26,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{112F7C
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fuel.WindowsPhone.SL.Login", "Fuel.WindowsPhone.SL.Login\Fuel.WindowsPhone.SL.Login.csproj", "{0B919F4C-FAA1-425B-AF04-E492789B51E9}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Fuel\Fuel.Shared\Fuel.Shared.projitems*{3edf4937-f6b0-4f14-be1e-38db78d36a04}*SharedItemsImports = 4
@@ -161,6 +163,20 @@ Global
 		{277ECF7A-F97A-4D0A-8268-85DD271FCEEB}.Release|x86.ActiveCfg = Release|x86
 		{277ECF7A-F97A-4D0A-8268-85DD271FCEEB}.Release|x86.Build.0 = Release|x86
 		{277ECF7A-F97A-4D0A-8268-85DD271FCEEB}.Release|x86.Deploy.0 = Release|x86
+		{0B919F4C-FAA1-425B-AF04-E492789B51E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B919F4C-FAA1-425B-AF04-E492789B51E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B919F4C-FAA1-425B-AF04-E492789B51E9}.Debug|ARM.ActiveCfg = Debug|ARM
+		{0B919F4C-FAA1-425B-AF04-E492789B51E9}.Debug|ARM.Build.0 = Debug|ARM
+		{0B919F4C-FAA1-425B-AF04-E492789B51E9}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{0B919F4C-FAA1-425B-AF04-E492789B51E9}.Debug|x86.ActiveCfg = Debug|x86
+		{0B919F4C-FAA1-425B-AF04-E492789B51E9}.Debug|x86.Build.0 = Debug|x86
+		{0B919F4C-FAA1-425B-AF04-E492789B51E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B919F4C-FAA1-425B-AF04-E492789B51E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B919F4C-FAA1-425B-AF04-E492789B51E9}.Release|ARM.ActiveCfg = Release|ARM
+		{0B919F4C-FAA1-425B-AF04-E492789B51E9}.Release|ARM.Build.0 = Release|ARM
+		{0B919F4C-FAA1-425B-AF04-E492789B51E9}.Release|x64.ActiveCfg = Release|Any CPU
+		{0B919F4C-FAA1-425B-AF04-E492789B51E9}.Release|x86.ActiveCfg = Release|x86
+		{0B919F4C-FAA1-425B-AF04-E492789B51E9}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using Fuel.Oauth.Base;
@@ -53,17 +54,13 @@ namespace Fuel.Oauth.Utils
         private new Dictionary<string, string> GetQueryParameters(string response)
         {
             var nameValueCollection = new Dictionary<string, string>();
-            string[] items = response.Split('&');
+            var items = response.Split('&');
 
-            foreach (string item in items)
+            foreach (var nameValue in from item in items where item.Contains("=") select item.Split('='))
             {
-                if (item.Contains("="))
-                {
-                    string[] nameValue = item.Split('=');
-                    if (nameValue[0].Contains("?"))
-                        nameValue[0] = nameValue[0].Replace("?", "");
-                    nameValueCollection.Add(nameValue[0], WebUtility.UrlDecode(nameValue[1]));
-                }
+                if (nameValue[0].Contains("?"))
+                    nameValue[0] = nameValue[0].Replace("?", "");
+                nameValueCollection.Add(nameValue[0], WebUtility.UrlDecode(nameValue[1]));
             }
             return nameValueCollection;
         }

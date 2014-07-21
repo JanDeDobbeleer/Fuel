@@ -10,7 +10,7 @@ namespace Fuel.Test.Api
     [TestClass]
     public class TestVikingService
     {
-        private OAuthToken _token = new OAuthToken(){TokenKey = "", TokenSecret = ""};
+        private OAuthToken _token;
 
         [TestInitialize]
         public async Task MyTestInitialize()
@@ -29,7 +29,7 @@ namespace Fuel.Test.Api
         [TestMethod]
         public async Task TestBalance()
         {
-            var balance = await VikingServiceFactory.GetInstance().GetSimBalance("+32470046092", _token);
+            var balance = await VikingServiceFactory.GetInstance().GetSimBalance("+32486774093", _token);
             Assert.AreNotEqual(new Balance(), balance);
         }
     }

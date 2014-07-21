@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base\ErrorHandling.cs" />
+    <Compile Include="Base\HttpWebRequestExtensions.cs" />
     <Compile Include="Base\ICredential.cs" />
     <Compile Include="Base\OauthBase.cs" />
     <Compile Include="Base\OAuthException.cs" />

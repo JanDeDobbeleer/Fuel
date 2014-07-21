@@ -1,15 +1,12 @@
 ﻿using System;
 using System.IO;
 using System.Net;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
 namespace Fuel.Oauth.Base
 {
     public class OAuthRequest: OAuthBase, IDisposable
     {
-        private IntPtr _nativeResource = Marshal.AllocHGlobal(100);
-
         protected async Task<string> OAuthResponseGet(string queryString, string signature, string url)
         {
             try
@@ -64,11 +61,7 @@ namespace Fuel.Oauth.Base
         // The bulk of the clean-up code is implemented in Dispose(bool)
         protected virtual void Dispose(bool disposing)
         {
-            // free native resources if there are any.
-            if (_nativeResource == IntPtr.Zero)
-                return;
-            Marshal.FreeHGlobal(_nativeResource);
-            _nativeResource = IntPtr.Zero;
+
         }
         #endregion
     }
