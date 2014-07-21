@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 using Fuel.Api.Classes;
 using Fuel.Api.Common;
@@ -11,12 +12,14 @@ namespace Fuel.Api.Service
 {
     public class VikingService2: IVikingApi
     {
+        private const string BaseUrl = "https://mobilevikings.com:443/api/2.0/oauth/";
+
         public async Task<OAuthToken> Login(string username, string password)
         {
             OAuthToken token;
             using (var xauth = new XAuth())
             {
-                token = await xauth.XAuthAccessTokenRequest(username, password, Credentials.GetInstance(), "https://mobilevikings.com:443/api/2.0/oauth/access_token/");
+                token = await xauth.XAuthAccessTokenRequest(username, password, Credentials.GetInstance(), BaseUrl + "access_token/");
             }
             return token;
         }
@@ -32,7 +35,7 @@ namespace Fuel.Api.Service
             using (var oauth = new OAuth())
             {
                 var parameters = new List<QueryParameter> { new QueryParameter("alias", "1") };
-                response = await oauth.OAuthRequest(Credentials.GetInstance(), token, "https://mobilevikings.com:443/api/2.0/oauth/msisdn_list.json", parameters);
+                response = await oauth.OAuthRequest(Credentials.GetInstance(), token, BaseUrl + "msisdn_list.json", parameters);
             }
             //TODO: finish this
             if(response != null && !string.IsNullOrWhiteSpace(response))
@@ -50,8 +53,8 @@ namespace Fuel.Api.Service
             string response;
             using (var oauth = new OAuth())
             {
-                var parameters = new List<QueryParameter> { new QueryParameter("msisdn", msisdn) };
-                response = await oauth.OAuthRequest(Credentials.GetInstance(), token, "https://mobilevikings.com:443/api/2.0/oauth/sim_balance.json", parameters);
+                var parameters = new List<QueryParameter> { new QueryParameter("msisdn", WebUtility.UrlEncode(msisdn)) };
+                response = await oauth.OAuthRequest(Credentials.GetInstance(), token, BaseUrl + "sim_balance.json", parameters);
             }
             //TODO: finish this
             if (response != null && !string.IsNullOrWhiteSpace(response))

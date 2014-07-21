@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 using Fuel.Api.Classes;
 using Fuel.Api.Service;
@@ -16,7 +17,7 @@ namespace Fuel.Test.Api
         public async Task MyTestInitialize()
         {
             if(_token == null)
-                _token = await VikingServiceFactory.GetInstance().Login("test", "test");
+                _token = await VikingServiceFactory.GetInstance().Login("jan.de.dobbeleer@gmail.com", "Sgom1981jj?");
         }
 
         [TestMethod]
@@ -29,7 +30,7 @@ namespace Fuel.Test.Api
         [TestMethod]
         public async Task TestBalance()
         {
-            var balance = await VikingServiceFactory.GetInstance().GetSimBalance("+32486774093", _token);
+            var balance = await VikingServiceFactory.GetInstance().GetSimBalance("+32470598580", _token);
             Assert.AreNotEqual(new Balance(), balance);
         }
     }
