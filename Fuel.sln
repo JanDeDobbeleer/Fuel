@@ -19,6 +19,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fuel.Test", "Fuel.Test\Fuel
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fuel.WindowsPhone.SL", "Fuel.WindowsPhone.SL\Fuel.WindowsPhone.SL.csproj", "{277ECF7A-F97A-4D0A-8268-85DD271FCEEB}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{112F7CE9-2605-4A1B-9B75-BC00AA25CC71}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Fuel\Fuel.Shared\Fuel.Shared.projitems*{3edf4937-f6b0-4f14-be1e-38db78d36a04}*SharedItemsImports = 4
