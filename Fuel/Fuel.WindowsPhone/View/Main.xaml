@@ -28,7 +28,7 @@
             <Setter Property="HorizontalAlignment" Value="Right" />
             <Setter Property="VerticalAlignment" Value="Center" />
         </Style>
-        <Style x:Key="CircleStyle" TargetType="controls:CircularProgressBar">
+        <Style x:Key="CircleStyle" TargetType="controls:AnimatedCircle">
             <Setter Property="HorizontalAlignment" Value="Stretch" />
             <Setter Property="VerticalAlignment" Value="Stretch" />
             <Setter Property="StrokeThickness" Value="10" />
@@ -74,16 +74,12 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                    <controls:CircularProgressBar Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3"
+                    <controls:AnimatedCircle Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3"
                                          SegmentColor="{ThemeResource SmsColorBrush}" 
                                          Radius="110"
-                                         Percentage="30">
-                    <!--<i:Interaction.Triggers>
-                        <EventTrigger EventName="Loaded">
-                            <ei:ControlStoryboardAction Storyboard="{ThemeResource Loading}"/>
-                        </EventTrigger>
-                    </i:Interaction.Triggers>-->
-                </controls:CircularProgressBar>
+                                         Percentage="30"
+                                             Style="{StaticResource CircleStyle}">
+                </controls:AnimatedCircle>
                     <controls:AnimatedCircle Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3"
                                              SegmentColor="{ThemeResource DataColorBrush}" 
                                              Radius="95"

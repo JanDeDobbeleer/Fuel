@@ -17,7 +17,7 @@ namespace Fuel.Test.Api
         public async Task MyTestInitialize()
         {
             if(_token == null)
-                _token = await VikingServiceFactory.GetInstance().Login("jan.de.dobbeleer@gmail.com", "Sgom1981jj?");
+                _token = await VikingServiceFactory.GetInstance().Login("test", "test");
         }
 
         [TestMethod]
@@ -30,7 +30,7 @@ namespace Fuel.Test.Api
         [TestMethod]
         public async Task TestBalance()
         {
-            var balance = await VikingServiceFactory.GetInstance().GetSimBalance("+32470598580", _token);
+            var balance = await VikingServiceFactory.GetInstance().GetSimBalance("+32470046092", _token);
             Assert.AreNotEqual(new Balance(), balance);
         }
     }

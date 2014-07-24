@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using Windows.Foundation;
 using Windows.UI;
 using Windows.UI.Xaml;
@@ -95,24 +94,25 @@ namespace Fuel.Controls
         private static void OnPercentageChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
         {
             var circle = sender as AnimatedCircle;
+            if(circle == null)
+                return;
             var angle = (circle.Percentage * 360) / 100;
             AnimationHelper.AnimatePath(circle.ProgressPath, circle.Radius, new Point(circle.Radius, 0), angle);
             
         }
 
-        private static void OnPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            //OnPropertyChanged();
-            var dp = d;
-        }
-
         public event PropertyChangedEventHandler PropertyChanged;
 
-        [NotifyPropertyChangedInvocator]
-        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        private static void OnPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
-            var handler = PropertyChanged;
-            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
+            var circle = sender as AnimatedCircle;
+            if (circle == null)
+                return;
+            var h = circle.PropertyChanged;
+            if (h != null)
+            {
+                h(circle, new PropertyChangedEventArgs(e.Property.ToString()));
+            }
         }
     }
 }
