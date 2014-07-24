@@ -7,7 +7,7 @@
     xmlns:controls="using:Fuel.Windows.Phone.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    
+
     <Page.Resources>
         <Style x:Key="ContentTextStyle" TargetType="TextBlock">
             <Setter Property="FontSize" Value="30" />
@@ -54,37 +54,39 @@
                     <TextBlock Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,54,0"/>
                 </Grid>
             </Pivot.Title>
-        
-        <!--Pivot item one-->
+
+            <!--Pivot item one-->
             <PivotItem x:Uid="MainPivot1">
-            <Grid Margin="15,0,10,0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="10" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="10" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="22" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
+                <Grid Margin="15,0,10,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="10" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="10" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="22" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
                     <controls:CircularProgressBar Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3"
-                                         SegmentColor="{ThemeResource SmsColorBrush}" 
-                                         Radius="110"
-                                         Percentage="30"
-                                         Style="{StaticResource CircleStyle}"/>
+                                                  SegmentColor="{ThemeResource SmsColorBrush}" 
+                                                  Radius="110"
+                                                  Percentage="30"
+                                                  Style="{StaticResource CircleStyle}"/>
                     <controls:CircularProgressBar Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3"
-                                             SegmentColor="{ThemeResource DataColorBrush}" 
-                                             Radius="95"
-                                             Percentage="30"/>
+                                                  SegmentColor="{ThemeResource DataColorBrush}" 
+                                                  Radius="95"
+                                                  Percentage="30"
+                                                  Style="{StaticResource CircleStyle}"/>
                     <controls:CircularProgressBar Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3"
-                                             SegmentColor="{ThemeResource VikingColorBrush}" 
-                                             Radius="80"
-                                             Percentage="75"/>
-                <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Text="{Binding Credit}"
+                                                  SegmentColor="{ThemeResource VikingColorBrush}" 
+                                                  Radius="80"
+                                                  Percentage="75"
+                                                  Style="{StaticResource CircleStyle}"/>
+                    <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Text="{Binding Credit}"
                                VerticalAlignment="Center" HorizontalAlignment="Center"
                                FontFamily="{StaticResource PhoneFontFamilyNormal}"
                                Foreground="{StaticResource PhoneForegroundBrush}" FontWeight="Bold"/>
@@ -92,7 +94,7 @@
                                Style="{ThemeResource RectangleStyle}" />
                     <TextBlock Text="{Binding Sms}" Style="{ThemeResource ContentTextStyle}" Grid.Row="1"
                                Grid.Column="1" />
-                <TextBlock x:Uid="Sms" Style="{StaticResource TextStyle}" Grid.Row="1" Grid.Column="2" />
+                    <TextBlock x:Uid="Sms" Style="{StaticResource TextStyle}" Grid.Row="1" Grid.Column="2" />
 
                     <Rectangle Fill="{ThemeResource DataColorBrush}" Grid.Row="3" Grid.Column="0"
                                Style="{ThemeResource RectangleStyle}" />
@@ -105,9 +107,9 @@
                     <TextBlock Text="{Binding Remaining}" Style="{ThemeResource ContentTextStyle}" Grid.Row="5"
                                Grid.Column="1" />
                     <TextBlock x:Uid="Remaining" Style="{ThemeResource TextStyle}" Grid.Row="5" Grid.Column="2" />
-            </Grid>
-        </PivotItem>
-            
+                </Grid>
+            </PivotItem>
+
         </Pivot>
     </Grid>
 </Page>
