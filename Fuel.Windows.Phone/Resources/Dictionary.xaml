@@ -9,5 +9,7 @@
     <SolidColorBrush x:Key="SmsColorBrush">#f4b300</SolidColorBrush>
     <SolidColorBrush x:Key="VikingSmsColorBrush">#f4b300</SolidColorBrush>
     <SolidColorBrush x:Key="VikingMinutesColorBrush">#006ac1</SolidColorBrush>
-    
+
+    <SolidColorBrush x:Key="VikingRed">#E21D29</SolidColorBrush>
+    <SolidColorBrush x:Key="VikingGreen">#2BC45D</SolidColorBrush>
 </ResourceDictionary>

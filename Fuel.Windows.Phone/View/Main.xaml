@@ -40,6 +40,7 @@
 
     <Grid>
         <Pivot>
+            
             <Pivot.Title>
                 <Grid Height="40" Width="{Binding ElementName=Pivot, Path=ActualWidth}"  Margin="-6,0,0,0">
                     <Grid.ColumnDefinitions>
@@ -57,7 +58,7 @@
 
             <!--Pivot item one-->
             <PivotItem x:Uid="MainPivot1">
-                <Grid Margin="15,0,10,0">
+                <Grid Margin="0,0,0,10">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*" />
                         <RowDefinition Height="Auto" />
@@ -112,4 +113,14 @@
 
         </Pivot>
     </Grid>
+
+    <Page.BottomAppBar>
+        <CommandBar>
+            <AppBarButton x:Uid="Refresh">
+                <AppBarButton.Icon>
+                    <BitmapIcon UriSource="../Icons/refresh.png"/>
+                </AppBarButton.Icon>
+            </AppBarButton>
+        </CommandBar>
+    </Page.BottomAppBar>
 </Page>
