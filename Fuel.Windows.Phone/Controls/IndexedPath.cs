@@ -27,7 +27,7 @@ namespace Fuel.Windows.Phone.Controls
             set
             {
                 _index = value;
-                Fill = (value == SelectedIndex) ? new SolidColorBrush(Colors.White) : (SolidColorBrush)Application.Current.Resources["InactiveBrush"];
+                Fill = (value == SelectedIndex) ? new SolidColorBrush(Colors.White) : new SolidColorBrush(Colors.LightGray);
             }
         }
     }
