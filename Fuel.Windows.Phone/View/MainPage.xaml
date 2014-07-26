@@ -7,8 +7,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Fuel.Windows.Phone.Controls"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    
+    Background="Black">
+
     <Page.Resources>
         <Style x:Key="ListBoxItemStyle" TargetType="ListBoxItem">
             <Setter Property="Background" Value="Transparent"/>
@@ -40,7 +40,7 @@
     </Page.Resources>
 
     <Page.BottomAppBar>
-        <CommandBar Foreground="Black" Background="White">
+        <CommandBar Foreground="DarkGray" Background="White">
             <AppBarButton x:Uid="Refresh">
                 <AppBarButton.Icon>
                     <BitmapIcon UriSource="../Icons/refresh.png"/>
@@ -48,20 +48,38 @@
             </AppBarButton>
         </CommandBar>
     </Page.BottomAppBar>
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="1"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="1"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="1"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="1"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
         <ListBox x:Name="ImageBar"
-                     Grid.Row="0"
-                     ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                     ItemContainerStyle="{StaticResource ListBoxItemStyle}"                     
-                     SelectedIndex="{Binding SelectedIndex, ElementName=ContentPivot, Mode=TwoWay}"
-                     Background="{ThemeResource VikingRed}"
-                     Padding="0,5,0,5">
+                 Grid.Row="0"
+                 Grid.Column="0"
+                 Grid.ColumnSpan="5"
+                 ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                 ItemContainerStyle="{StaticResource ListBoxItemStyle}"                     
+                 SelectedIndex="{Binding SelectedIndex, ElementName=ContentPivot, Mode=TwoWay}"
+                 Background="{ThemeResource VikingRed}"
+                 Padding="0,5,0,5">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <controls:SplitPanel/>
@@ -77,61 +95,50 @@
                 <controls:IndexedPath Index="2" SelectedIndex="{Binding SelectedIndex, ElementName=ContentPivot, Mode=TwoWay}" Style="{StaticResource IndexedPathStyle}" Data="M64,5.1430006L63.286486,11.908481 62.574169,18.674001 59.122931,15.221438 49.564644,24.856143 49.589999,24.881308 44.738304,29.768 34.04957,19.161486 16.246351,37.101002 11.357,32.249504 33.930229,9.5059996 34.083288,9.6579561 34.166595,9.5740004 44.675789,20.004088 54.253777,10.351877 50.471003,6.5700893 57.234251,5.8578291z M0,0L7.7270012,0 7.7270012,48.351 58.115002,48.351 58.115002,56.077002 7.7270012,56.077002 0,56.077002 0,48.351z"/>
             </ListBoxItem>
         </ListBox>
-        <Grid Grid.Row="1" Background="Black" Margin="0,15,0,25">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
+        
+        <!--Circle area-->
+        <TextBlock Grid.Column="0" x:Uid="Benefit" Grid.Row="1" Grid.ColumnSpan="5" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,5,0,10" FontSize="{StaticResource TextStyleMediumFontSize}"/>
+        <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="5" Margin="0,2,0,5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock x:Uid="Benefit" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,10" FontSize="{StaticResource TextStyleMediumFontSize}"/>
-            
-            <controls:CircularProgressBar Percentage="100" Grid.Column="0" Grid.Row="1" Style="{StaticResource CircleStyle}"/>
-            <controls:CircularProgressBar Percentage="66" Grid.Column="0" Grid.Row="1" Style="{StaticResource CircleStyle}" SegmentColor="DimGray"/>
-            <controls:CircularProgressBar Percentage="100" Grid.Column="1"  Grid.Row="1" Style="{StaticResource CircleStyle}"/>
-            <controls:CircularProgressBar Percentage="45" Grid.Column="1"  Grid.Row="1" Style="{StaticResource CircleStyle}" SegmentColor="DimGray"/>
+            <controls:CircularProgressBar Percentage="100" Grid.Column="0" Style="{StaticResource CircleStyle}"/>
+            <controls:CircularProgressBar Percentage="66" Grid.Column="0" Style="{StaticResource CircleStyle}" SegmentColor="DimGray"/>
+            <controls:CircularProgressBar Percentage="100" Grid.Column="1" Style="{StaticResource CircleStyle}"/>
+            <controls:CircularProgressBar Percentage="45" Grid.Column="1" Style="{StaticResource CircleStyle}" SegmentColor="DimGray"/>
         </Grid>
-        <Grid Grid.Row="2" Background="White">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock Grid.Row="0" Grid.Column="0" Foreground="{ThemeResource VikingGreen}" FontSize="{StaticResource TextStyleMediumFontSize}" Margin="10,5,0,5">
+        
+        <Rectangle Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="5" Fill="DarkGray"/>
+        <!--Rectangle to fill white-->
+        <Rectangle Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="5" Grid.RowSpan="8" Fill="White" />
+        <!--Progressbars-->
+        <TextBlock  Grid.Row="4" Grid.Column="0" Foreground="{ThemeResource VikingGreen}" FontSize="{StaticResource TextStyleMediumFontSize}" Margin="10,5,0,5">
                 <Run>28.93</Run>
                 <LineBreak />
                 <Run>CREDIT</Run>
-            </TextBlock>
-            <TextBlock Grid.Row="0" Grid.Column="1" Foreground="{ThemeResource VikingGreen}" FontSize="{StaticResource TextStyleMediumFontSize}" Margin="10,5,0,5">
+        </TextBlock>
+        <Rectangle Grid.Row="4" Grid.Column="1"  Fill="DarkGray"/>
+        <TextBlock Grid.Row="4" Grid.Column="2" Foreground="{ThemeResource VikingGreen}" FontSize="{StaticResource TextStyleMediumFontSize}" Margin="10,5,0,5">
                 <Run>250</Run>
                 <LineBreak />
                 <Run>VIKING POINTS</Run>
-            </TextBlock>
-            <TextBlock Grid.Row="1" Grid.Column="0" Foreground="DarkGray" FontSize="{StaticResource TextStyleMediumFontSize}" Margin="10,0,0,5">
+        </TextBlock>
+        <Rectangle Grid.Row="4" Grid.Column="3"  Fill="DarkGray"/>
+        <Rectangle Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="5" Fill="DarkGray"/>
+        <TextBlock Grid.Row="6" Grid.Column="0" Foreground="DarkGray" FontSize="{StaticResource TextStyleMediumFontSize}" Margin="10,10,0,5">
                 <Run>16</Run>
                 <LineBreak />
                 <Run>AUG</Run>
-            </TextBlock>
-            <TextBlock Grid.Row="1" Grid.Column="2" HorizontalAlignment="Left" Foreground="{ThemeResource VikingGreen}" FontSize="{StaticResource TextStyleMediumFontSize}" Margin="0,0,0,5">
+        </TextBlock>
+        <TextBlock Grid.Row="6" Grid.Column="4" HorizontalAlignment="Left" Foreground="{ThemeResource VikingGreen}" FontSize="{StaticResource TextStyleMediumFontSize}" Margin="0,10,0,5">
                 <Run>24</Run>
                 <LineBreak />
                 <Run>DAYS</Run>
-            </TextBlock>
-            <ProgressBar Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Height="10" Foreground="{ThemeResource VikingGreen}" Value="70" Margin="0,0,0,7"/>
-            <ProgressBar Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource ProgresStyle}" Value="30"/>
-            <ProgressBar Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource ProgresStyle}" Value="70"/>
-            <ProgressBar Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource ProgresStyle}" Value="50"/>
-        </Grid>
+        </TextBlock>
+        <ProgressBar Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="5" Height="10" Foreground="{ThemeResource VikingGreen}" Value="70" Margin="0,0,0,7"/>
+        <ProgressBar Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="5" Style="{StaticResource ProgresStyle}" Value="30"/>
+        <ProgressBar Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="5" Style="{StaticResource ProgresStyle}" Value="70"/>
+        <ProgressBar Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="5" Style="{StaticResource ProgresStyle}" Value="50"/>
     </Grid>
 </Page>
