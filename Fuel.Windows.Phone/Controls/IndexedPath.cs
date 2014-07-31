@@ -9,6 +9,7 @@ namespace Fuel.Windows.Phone.Controls
     {
         public static readonly DependencyProperty SelectedIndexBindingProperty =
             DependencyProperty.Register("SelectedIndex", typeof(int), typeof(IndexedPath), new PropertyMetadata(0, OnSelectedIndexChanged));
+
         public int SelectedIndex
         {
             get { return (int)GetValue(SelectedIndexBindingProperty); }
@@ -17,7 +18,7 @@ namespace Fuel.Windows.Phone.Controls
 
         private static void OnSelectedIndexChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            ((IndexedPath)d).Fill = ((int)e.NewValue == ((IndexedPath)d).Index) ? new SolidColorBrush(Colors.White) : (SolidColorBrush)Application.Current.Resources["InactiveBrush"];
+            ((IndexedPath)d).Fill = ((int)e.NewValue == ((IndexedPath)d).Index) ? new SolidColorBrush(Colors.White) : new SolidColorBrush(Colors.LightGray);
         }
 
         private int _index;

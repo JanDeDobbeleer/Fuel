@@ -6,8 +6,12 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Fuel.Windows.Phone.Controls"
+    xmlns:i="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:media="using:Microsoft.Xaml.Interactions.Media"
     mc:Ignorable="d"
-    Background="Black">
+    DataContext="{Binding Main, Source={StaticResource Locator}}"
+    Background="White">
 
     <Page.Resources>
         <Style x:Key="ListBoxItemStyle" TargetType="ListBoxItem">
@@ -28,20 +32,25 @@
         <Style x:Key="CircleStyle" TargetType="controls:CircularProgressBar">
             <Setter Property="HorizontalAlignment" Value="Stretch" />
             <Setter Property="VerticalAlignment" Value="Stretch" />
-            <Setter Property="StrokeThickness" Value="7" />
+            <Setter Property="StrokeThickness" Value="10" />
             <Setter Property="SegmentColor" Value="{ThemeResource VikingGreen}"/>
             <Setter Property="Radius" Value="82"/>
+            <Setter Property="Margin" Value="0,0,0,10"/>
         </Style>
         <Style x:Key="ProgresStyle" TargetType="ProgressBar">
             <Setter Property="Height" Value="50"/>
             <Setter Property="Foreground" Value="{ThemeResource VikingGreen}"/>
             <Setter Property="Margin" Value="0,0,0,2"/>
         </Style>
+        <Storyboard x:Name="Loading">
+            <DoubleAnimation Duration="0:0:2" From="0" To="{Binding SmsPercentage}" Storyboard.TargetProperty="Percentage" Storyboard.TargetName="SmsCircle"/>
+            <DoubleAnimation Duration="0:0:2" From="0" To="{Binding CallPercentage}" Storyboard.TargetProperty="Percentage" Storyboard.TargetName="CallCircle"/>
+        </Storyboard>
     </Page.Resources>
 
     <Page.BottomAppBar>
         <CommandBar Foreground="DarkGray" Background="White">
-            <AppBarButton x:Uid="Refresh">
+            <AppBarButton x:Uid="Refresh" Command="{Binding RefreshCommand}">
                 <AppBarButton.Icon>
                     <BitmapIcon UriSource="../Icons/refresh.png"/>
                 </AppBarButton.Icon>
@@ -51,34 +60,16 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="1"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="1"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" MinHeight="84"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="1"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="1"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
         <ListBox x:Name="ImageBar"
                  Grid.Row="0"
-                 Grid.Column="0"
-                 Grid.ColumnSpan="5"
                  ScrollViewer.VerticalScrollBarVisibility="Disabled"
                  ItemContainerStyle="{StaticResource ListBoxItemStyle}"                     
                  SelectedIndex="{Binding SelectedIndex, ElementName=ContentPivot, Mode=TwoWay}"
                  Background="{ThemeResource VikingRed}"
+                 Margin="-2,0,-2,0"
                  Padding="0,5,0,5">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -95,50 +86,120 @@
                 <controls:IndexedPath Index="2" SelectedIndex="{Binding SelectedIndex, ElementName=ContentPivot, Mode=TwoWay}" Style="{StaticResource IndexedPathStyle}" Data="M64,5.1430006L63.286486,11.908481 62.574169,18.674001 59.122931,15.221438 49.564644,24.856143 49.589999,24.881308 44.738304,29.768 34.04957,19.161486 16.246351,37.101002 11.357,32.249504 33.930229,9.5059996 34.083288,9.6579561 34.166595,9.5740004 44.675789,20.004088 54.253777,10.351877 50.471003,6.5700893 57.234251,5.8578291z M0,0L7.7270012,0 7.7270012,48.351 58.115002,48.351 58.115002,56.077002 7.7270012,56.077002 0,56.077002 0,48.351z"/>
             </ListBoxItem>
         </ListBox>
-        
-        <!--Circle area-->
-        <TextBlock Grid.Column="0" x:Uid="Benefit" Grid.Row="1" Grid.ColumnSpan="5" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,5,0,10" FontSize="{StaticResource TextStyleMediumFontSize}"/>
-        <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="5" Margin="0,2,0,5">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <controls:CircularProgressBar Percentage="100" Grid.Column="0" Style="{StaticResource CircleStyle}"/>
-            <controls:CircularProgressBar Percentage="66" Grid.Column="0" Style="{StaticResource CircleStyle}" SegmentColor="DimGray"/>
-            <controls:CircularProgressBar Percentage="100" Grid.Column="1" Style="{StaticResource CircleStyle}"/>
-            <controls:CircularProgressBar Percentage="45" Grid.Column="1" Style="{StaticResource CircleStyle}" SegmentColor="DimGray"/>
-        </Grid>
-        
-        <Rectangle Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="5" Fill="DarkGray"/>
-        <!--Rectangle to fill white-->
-        <Rectangle Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="5" Grid.RowSpan="8" Fill="White" />
-        <!--Progressbars-->
-        <TextBlock  Grid.Row="4" Grid.Column="0" Foreground="{ThemeResource VikingGreen}" FontSize="{StaticResource TextStyleMediumFontSize}" Margin="10,5,0,5">
-                <Run>28.93</Run>
-                <LineBreak />
-                <Run>CREDIT</Run>
-        </TextBlock>
-        <Rectangle Grid.Row="4" Grid.Column="1"  Fill="DarkGray"/>
-        <TextBlock Grid.Row="4" Grid.Column="2" Foreground="{ThemeResource VikingGreen}" FontSize="{StaticResource TextStyleMediumFontSize}" Margin="10,5,0,5">
-                <Run>250</Run>
-                <LineBreak />
-                <Run>VIKING POINTS</Run>
-        </TextBlock>
-        <Rectangle Grid.Row="4" Grid.Column="3"  Fill="DarkGray"/>
-        <Rectangle Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="5" Fill="DarkGray"/>
-        <TextBlock Grid.Row="6" Grid.Column="0" Foreground="DarkGray" FontSize="{StaticResource TextStyleMediumFontSize}" Margin="10,10,0,5">
+
+        <!--Pivot 1 Balance-->
+        <Pivot x:Name="ContentPivot" Margin="0,70,0,0" Grid.RowSpan="2" Grid.Row="0">
+            <PivotItem Margin="0,0,0,0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="1"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="1"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="1"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="1"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <!--Circle area-->
+                    <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="5" Margin="0,0,0,0" Background="Black">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Uid="Benefit" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="{StaticResource TextStyleMediumFontSize}"/>
+                        <controls:CircularProgressBar Grid.Row="1" Percentage="100" Grid.Column="0" Style="{StaticResource CircleStyle}" Animate="False"/>
+                        <controls:CircularProgressBar Grid.Row="1" Animate="True" x:Name="SmsCircle" Percentage="{Binding SmsPercentage, Mode=OneWay}" Grid.Column="0" Style="{StaticResource CircleStyle}" SegmentColor="DimGray"/>
+                        <controls:CircularProgressBar Grid.Row="1" Percentage="100" Grid.Column="1" Style="{StaticResource CircleStyle}" Animate="False"/>
+                        <controls:CircularProgressBar Grid.Row="1" Animate="True" x:Name="CallCircle" Percentage="{Binding CallPercentage, Mode=OneWay}" Grid.Column="1" Style="{StaticResource CircleStyle}" SegmentColor="DimGray"/>
+                    </Grid>
+                    <Rectangle Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" Fill="DarkGray"/>
+                    <!--Progressbars-->
+                    <TextBlock  Grid.Row="2" Grid.Column="0" Foreground="{ThemeResource VikingGreen}" FontSize="{StaticResource TextStyleMediumFontSize}" Margin="10,5,0,5">
+                        <Run>28.93</Run>
+                        <LineBreak />
+                        <Run>CREDIT</Run>
+                    </TextBlock>
+                    <Rectangle Grid.Row="2" Grid.Column="1"  Fill="DarkGray"/>
+                    <TextBlock Grid.Row="2" Grid.Column="2" Foreground="{ThemeResource VikingGreen}" FontSize="{StaticResource TextStyleMediumFontSize}" Margin="10,5,0,5">
+                        <Run>250</Run>
+                        <LineBreak />
+                        <Run>VIKING POINTS</Run>
+                    </TextBlock>
+                    <Rectangle Grid.Row="2" Grid.Column="3"  Fill="DarkGray"/>
+                    <Rectangle Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="5" Fill="DarkGray"/>
+                    <TextBlock Grid.Row="4" Grid.Column="0" Foreground="DarkGray" FontSize="{StaticResource TextStyleMediumFontSize}" Margin="10,10,0,5">
                 <Run>16</Run>
                 <LineBreak />
                 <Run>AUG</Run>
-        </TextBlock>
-        <TextBlock Grid.Row="6" Grid.Column="4" HorizontalAlignment="Left" Foreground="{ThemeResource VikingGreen}" FontSize="{StaticResource TextStyleMediumFontSize}" Margin="0,10,0,5">
+                    </TextBlock>
+                    <TextBlock Grid.Row="4" Grid.Column="4" HorizontalAlignment="Left" Foreground="{ThemeResource VikingGreen}" FontSize="{StaticResource TextStyleMediumFontSize}" Margin="0,10,0,5">
                 <Run>24</Run>
                 <LineBreak />
                 <Run>DAYS</Run>
-        </TextBlock>
-        <ProgressBar Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="5" Height="10" Foreground="{ThemeResource VikingGreen}" Value="70" Margin="0,0,0,7"/>
-        <ProgressBar Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="5" Style="{StaticResource ProgresStyle}" Value="30"/>
-        <ProgressBar Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="5" Style="{StaticResource ProgresStyle}" Value="70"/>
-        <ProgressBar Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="5" Style="{StaticResource ProgresStyle}" Value="50"/>
+                    </TextBlock>
+                    <ProgressBar Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="5" Height="10" Foreground="{ThemeResource VikingGreen}" Value="70" Margin="0,0,0,7"/>
+                    <ProgressBar Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="5" Style="{StaticResource ProgresStyle}" Value="30"/>
+                    <ProgressBar Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="5" Style="{StaticResource ProgresStyle}" Value="70"/>
+                    <ProgressBar Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="5" Style="{StaticResource ProgresStyle}" Value="50"/>
+                </Grid>
+            </PivotItem>
+
+            <!--Pivot item 2 people-->
+            <PivotItem Margin="0,0,0,0">
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="{StaticResource TextStyleMediumFontSize}">
+                    <Run>People</Run>
+                    <LineBreak />
+                    <Run>Pivot</Run>
+                </TextBlock>
+            </PivotItem>
+
+            <!--Pivot item 3 analytics-->
+            <PivotItem Margin="0,0,0,0">
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontSize="{StaticResource TextStyleMediumFontSize}">
+                    <Run>Analytics</Run>
+                    <LineBreak />
+                    <Run>Pivot</Run>
+                </TextBlock>
+            </PivotItem>
+        </Pivot>
+
+
+        <!--visualstate manager-->
+        <!--<VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="ApplicationViewStates">
+                <VisualState x:Name="Default"/>
+                <VisualState x:Name="Animate">
+                    <Storyboard>
+                        <DoubleAnimation Duration="0:0:1" From="0" To="33" Storyboard.TargetProperty="Percentage" Storyboard.TargetName="SmsCircle"/>
+                        <DoubleAnimation Duration="0:0:1" From="0" To="{Binding CallPercentage}" Storyboard.TargetProperty="Percentage" Storyboard.TargetName="CallCircle"/>
+                    </Storyboard>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>-->
+
+        <!--<i:Interaction.Behaviors>
+            <core:DataTriggerBehavior Binding="{Binding CurrentState}"
+                                      ComparisonCondition="Equal" Value="Default">
+                <core:GoToStateAction StateName="Default" />
+            </core:DataTriggerBehavior>
+            <core:DataTriggerBehavior Binding="{Binding CurrentState}"
+                                      ComparisonCondition="Equal" Value="Animate">
+                <core:GoToStateAction StateName="Animate" />
+            </core:DataTriggerBehavior>
+        </i:Interaction.Behaviors>-->
     </Grid>
 </Page>

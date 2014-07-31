@@ -1,28 +1,45 @@
 ﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 
 namespace Fuel.Windows.Phone.ViewModel
 {
     public class MainViewModel : ViewModelBase
     {
-        private string _helloWorld;
-
-        public string HelloWorld
+        private double _smsPercentage;
+        public double SmsPercentage
         {
-            get
-            {
-                return _helloWorld;
-            }
+            get { return _smsPercentage; }
             set
             {
-                Set(() => HelloWorld, ref _helloWorld, value);
+                _smsPercentage = value;
+                RaisePropertyChanged(()=> SmsPercentage);
             }
         }
 
+        private double _callPercentage;
+        public double CallPercentage
+        {
+            get { return _callPercentage; }
+            set
+            {
+                _callPercentage = value;
+                RaisePropertyChanged(() => CallPercentage);
+            }
+        }
+
+        public RelayCommand RefreshCommand { get; set; }
+
         public MainViewModel()
         {
-            HelloWorld = IsInDesignMode
-                ? "Runs in design mode"
-                : "Runs in runtime mode";
+            //TODO: remove this when done testing
+            SmsPercentage = 33;
+            CallPercentage = 66;
+            RefreshCommand = new RelayCommand(() =>
+            {
+                CallPercentage = 70;
+                SmsPercentage = 65;
+                //Messenger.Default.Send(new StartStoryboardMessage {StoryboardName = "Loading", LoopForever = false});
+            });
         }
     }
 }
