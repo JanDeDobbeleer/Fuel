@@ -2,7 +2,6 @@
     x:Class="Fuel.Windows.Phone.View.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Fuel.Windows.Phone.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:Fuel.Windows.Phone.Controls"
@@ -11,7 +10,8 @@
     xmlns:media="using:Microsoft.Xaml.Interactions.Media"
     mc:Ignorable="d"
     DataContext="{Binding Main, Source={StaticResource Locator}}"
-    Background="White">
+    Background="White"
+    x:Name="Page">
 
     <Page.Resources>
         <Style x:Key="ListBoxItemStyle" TargetType="ListBoxItem">
@@ -24,8 +24,8 @@
         </Style>
         <Style x:Key="IndexedPathStyle" TargetType="controls:IndexedPath">
             <Setter Property="Stretch" Value="Uniform"/>
-            <Setter Property="Width" Value="65"/>
-            <Setter Property="Height" Value="65"/>
+            <Setter Property="Width" Value="30"/>
+            <Setter Property="Height" Value="30"/>
             <Setter Property="Margin" Value="0,0,0,0"/>
             <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
         </Style>
@@ -43,8 +43,9 @@
             <Setter Property="Margin" Value="0,0,0,2"/>
         </Style>
         <Storyboard x:Name="Loading">
-            <DoubleAnimation Duration="0:0:2" From="0" To="{Binding SmsPercentage}" Storyboard.TargetProperty="Percentage" Storyboard.TargetName="SmsCircle"/>
-            <DoubleAnimation Duration="0:0:2" From="0" To="{Binding CallPercentage}" Storyboard.TargetProperty="Percentage" Storyboard.TargetName="CallCircle"/>
+            <DoubleAnimation Duration="0:0:1" From="0" To="{Binding SmsPercentage}" Storyboard.TargetProperty="Percentage" Storyboard.TargetName="SmsCircle"/>
+            <DoubleAnimation Duration="0:0:1" From="0" To="{Binding CallPercentage}" Storyboard.TargetProperty="Percentage" Storyboard.TargetName="CallCircle"/>
+            <DoubleAnimation Duration="0:0:1" From="0" To="{Binding BarPercentage}" Storyboard.TargetProperty="Value" Storyboard.TargetName="ProgressBar"/>
         </Storyboard>
     </Page.Resources>
 
@@ -60,7 +61,7 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" MinHeight="84"/>
+            <RowDefinition Height="40"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <ListBox x:Name="ImageBar"
@@ -88,7 +89,7 @@
         </ListBox>
 
         <!--Pivot 1 Balance-->
-        <Pivot x:Name="ContentPivot" Margin="0,70,0,0" Grid.RowSpan="2" Grid.Row="0">
+        <Pivot x:Name="ContentPivot" Margin="0,26,0,0" Grid.RowSpan="2" Grid.Row="0">
             <PivotItem Margin="0,0,0,0">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -122,9 +123,9 @@
                         </Grid.ColumnDefinitions>
                         <TextBlock x:Uid="Benefit" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="{StaticResource TextStyleMediumFontSize}"/>
                         <controls:CircularProgressBar Grid.Row="1" Percentage="100" Grid.Column="0" Style="{StaticResource CircleStyle}" Animate="False"/>
-                        <controls:CircularProgressBar Grid.Row="1" Animate="True" x:Name="SmsCircle" Percentage="{Binding SmsPercentage, Mode=OneWay}" Grid.Column="0" Style="{StaticResource CircleStyle}" SegmentColor="DimGray"/>
+                        <controls:CircularProgressBar Grid.Row="1" Animate="True" x:Name="SmsCircle" AnimatePercentage="{Binding SmsPercentage}" Grid.Column="0" Style="{StaticResource CircleStyle}" SegmentColor="DimGray"/>
                         <controls:CircularProgressBar Grid.Row="1" Percentage="100" Grid.Column="1" Style="{StaticResource CircleStyle}" Animate="False"/>
-                        <controls:CircularProgressBar Grid.Row="1" Animate="True" x:Name="CallCircle" Percentage="{Binding CallPercentage, Mode=OneWay}" Grid.Column="1" Style="{StaticResource CircleStyle}" SegmentColor="DimGray"/>
+                        <controls:CircularProgressBar Grid.Row="1" Animate="True" x:Name="CallCircle" AnimatePercentage="{Binding CallPercentage}" Grid.Column="1" Style="{StaticResource CircleStyle}" SegmentColor="DimGray"/>
                     </Grid>
                     <Rectangle Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="5" Fill="DarkGray"/>
                     <!--Progressbars-->
@@ -151,7 +152,7 @@
                 <LineBreak />
                 <Run>DAYS</Run>
                     </TextBlock>
-                    <ProgressBar Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="5" Height="10" Foreground="{ThemeResource VikingGreen}" Value="70" Margin="0,0,0,7"/>
+                    <ProgressBar x:Name="ProgressBar" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="5" Height="10" Foreground="{ThemeResource VikingGreen}" Value="{Binding BarPercentage}" Margin="0,0,0,7"/>
                     <ProgressBar Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="5" Style="{StaticResource ProgresStyle}" Value="30"/>
                     <ProgressBar Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="5" Style="{StaticResource ProgresStyle}" Value="70"/>
                     <ProgressBar Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="5" Style="{StaticResource ProgresStyle}" Value="50"/>

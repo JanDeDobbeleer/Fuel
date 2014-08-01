@@ -1,5 +1,8 @@
-﻿using GalaSoft.MvvmLight;
+﻿using System;
+using Fuel.Windows.Phone.Common;
+using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace Fuel.Windows.Phone.ViewModel
 {
@@ -27,19 +30,38 @@ namespace Fuel.Windows.Phone.ViewModel
             }
         }
 
+        private double _barPercentage;
+        public double BarPercentage
+        {
+            get { return _barPercentage; }
+            set
+            {
+                _barPercentage = value;
+                RaisePropertyChanged(() => BarPercentage);
+            }
+        }
+
         public RelayCommand RefreshCommand { get; set; }
 
         public MainViewModel()
         {
             //TODO: remove this when done testing
-            SmsPercentage = 33;
-            CallPercentage = 66;
+            SmsPercentage = 10;
+            CallPercentage = 20;
+            BarPercentage = 30;
             RefreshCommand = new RelayCommand(() =>
             {
-                CallPercentage = 70;
-                SmsPercentage = 65;
-                //Messenger.Default.Send(new StartStoryboardMessage {StoryboardName = "Loading", LoopForever = false});
+                CallPercentage = GetRandomNumber(0,100);
+                SmsPercentage = GetRandomNumber(0, 100);
+                BarPercentage = GetRandomNumber(0, 100);
+                //Messenger.Default.Send(new StartStoryboardMessage {StoryboardName = "Loading", LoopForever = true});
             });
+        }
+
+        public double GetRandomNumber(double minimum, double maximum)
+        {
+            var random = new Random();
+            return random.NextDouble() * (maximum - minimum) + minimum;
         }
     }
 }

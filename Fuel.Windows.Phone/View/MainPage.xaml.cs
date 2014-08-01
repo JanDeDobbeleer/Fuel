@@ -36,12 +36,7 @@ namespace Fuel.Windows.Phone.View
             if (storyboard == null) 
                 return;
             storyboard.RepeatBehavior = loopForever ? RepeatBehavior.Forever : new RepeatBehavior(1);
-            CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal,
-            () =>
-            {
-                storyboard.Begin();
-            });
-            
+            storyboard.Begin();
         }
     }
 }

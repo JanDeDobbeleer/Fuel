@@ -1,7 +1,6 @@
 ﻿using System;
 using Windows.ApplicationModel.Core;
 using Windows.Foundation;
-using Windows.Management.Deployment;
 using Windows.UI;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
@@ -18,9 +17,12 @@ namespace Fuel.Windows.Phone.Controls
         public static readonly DependencyProperty PercentageProperty =
             DependencyProperty.Register("Percentage", typeof(double), typeof(CircularProgressBar), new PropertyMetadata(65d, OnPercentageChanged));
 
+        public static readonly DependencyProperty AnimatePercentageProperty =
+            DependencyProperty.Register("AnimatePercentage", typeof(double), typeof(CircularProgressBar), new PropertyMetadata(65d, OnAnimatePercentageChanged));
+
         // Using a DependencyProperty as the backing store for StrokeThickness.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty StrokeThicknessProperty =
-            DependencyProperty.Register("StrokeThickness", typeof(int), typeof(CircularProgressBar), new PropertyMetadata(5));
+            DependencyProperty.Register("StrokeThickness", typeof(int), typeof(CircularProgressBar), new PropertyMetadata(5, OnPropertyChanged));
 
         // Using a DependencyProperty as the backing store for SegmentColor.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SegmentColorProperty =
@@ -40,8 +42,8 @@ namespace Fuel.Windows.Phone.Controls
 
         public CircularProgressBar()
         {
-            DataContext = this;
             InitializeComponent();
+            (Content as FrameworkElement).DataContext = this;
             Angle = (Percentage * 360) / 100;
             RenderArc();
         }
@@ -76,6 +78,12 @@ namespace Fuel.Windows.Phone.Controls
             set { SetValue(PercentageProperty, value); }
         }
 
+        public double AnimatePercentage
+        {
+            get { return (double)GetValue(PercentageProperty); }
+            set { SetValue(PercentageProperty, value); }
+        }
+
         public double Angle
         {
             get { return (double)GetValue(AngleProperty); }
@@ -85,15 +93,18 @@ namespace Fuel.Windows.Phone.Controls
         private static void OnPercentageChanged(DependencyObject sender, DependencyPropertyChangedEventArgs args)
         {
             var circle = sender as CircularProgressBar;
-            if (circle == null) 
-                return;
             circle.Angle = (circle.Percentage * 360) / 100;
-            if(!circle.Animate)
+        }
+
+        private static void OnAnimatePercentageChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        {
+            var circle = sender as CircularProgressBar;
+            if (!circle.Animate)
                 return;
             var myDoubleAnimation = new DoubleAnimation
             {
                 From = 0,
-                To = circle.Percentage,
+                To = circle.AnimatePercentage,
                 Duration = new Duration(TimeSpan.FromSeconds(1))
             };
             Storyboard.SetTarget(myDoubleAnimation, circle);
